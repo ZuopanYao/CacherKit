@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CacheKit
 
 class ViewController: UIViewController {
 

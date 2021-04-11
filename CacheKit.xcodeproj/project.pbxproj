@@ -17,6 +17,11 @@
 		B90FD98F26232C7D000D1E52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90FD98D26232C7D000D1E52 /* LaunchScreen.storyboard */; };
 		B90FD99826232C96000D1E52 /* CacheKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90FD96D26232B8F000D1E52 /* CacheKit.framework */; };
 		B90FD99926232C96000D1E52 /* CacheKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B90FD96D26232B8F000D1E52 /* CacheKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B90FD9A026232F82000D1E52 /* CKType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD99E26232F82000D1E52 /* CKType.swift */; };
+		B90FD9A126232F82000D1E52 /* CKObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD99F26232F82000D1E52 /* CKObject.swift */; };
+		B90FD9A426232F96000D1E52 /* CKCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A326232F96000D1E52 /* CKCacher.swift */; };
+		B90FD9A726232FBA000D1E52 /* CacheKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A626232FBA000D1E52 /* CacheKit.swift */; };
+		B90FD9AA26232FD9000D1E52 /* CKConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A926232FD9000D1E52 /* CKConsole.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,11 @@
 		B90FD98B26232C7D000D1E52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B90FD98E26232C7D000D1E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B90FD99026232C7D000D1E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B90FD99E26232F82000D1E52 /* CKType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKType.swift; sourceTree = "<group>"; };
+		B90FD99F26232F82000D1E52 /* CKObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKObject.swift; sourceTree = "<group>"; };
+		B90FD9A326232F96000D1E52 /* CKCacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKCacher.swift; sourceTree = "<group>"; };
+		B90FD9A626232FBA000D1E52 /* CacheKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKit.swift; sourceTree = "<group>"; };
+		B90FD9A926232FD9000D1E52 /* CKConsole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKConsole.swift; sourceTree = "<group>"; };
 		F63403FCD10E83867D3C599E /* Pods-CacheKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CacheKit.release.xcconfig"; path = "Target Support Files/Pods-CacheKit/Pods-CacheKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +130,11 @@
 		B90FD96F26232B8F000D1E52 /* CacheKit */ = {
 			isa = PBXGroup;
 			children = (
+				B90FD99F26232F82000D1E52 /* CKObject.swift */,
+				B90FD9A326232F96000D1E52 /* CKCacher.swift */,
+				B90FD9A926232FD9000D1E52 /* CKConsole.swift */,
+				B90FD99E26232F82000D1E52 /* CKType.swift */,
+				B90FD9A626232FBA000D1E52 /* CacheKit.swift */,
 				B90FD97026232B8F000D1E52 /* CacheKit.h */,
 				B90FD97126232B8F000D1E52 /* Info.plist */,
 			);
@@ -203,6 +218,7 @@
 				TargetAttributes = {
 					B90FD96C26232B8F000D1E52 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 					B90FD97F26232C7A000D1E52 = {
 						CreatedOnToolsVersion = 12.4;
@@ -278,6 +294,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B90FD9A426232F96000D1E52 /* CKCacher.swift in Sources */,
+				B90FD9A026232F82000D1E52 /* CKType.swift in Sources */,
+				B90FD9A126232F82000D1E52 /* CKObject.swift in Sources */,
+				B90FD9A726232FBA000D1E52 /* CacheKit.swift in Sources */,
+				B90FD9AA26232FD9000D1E52 /* CKConsole.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 202BB9201EC3CFBAD12F0D90 /* Pods-CacheKit.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = F6Z3RQ3U65;
@@ -464,6 +486,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -473,6 +496,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F63403FCD10E83867D3C599E /* Pods-CacheKit.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = F6Z3RQ3U65;
@@ -498,6 +522,7 @@
 		B90FD99126232C7D000D1E52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -518,6 +543,7 @@
 		B90FD99226232C7D000D1E52 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint BasicKit.podspec' to ensure this is a
+#  Be sure to run `pod spec lint CacheKit.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see https://guides.cocoapods.org/syntax/podspec.html
@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "BasicKit"
+  spec.name         = "CacheKit"
   spec.version      = "1.0.2"
   spec.summary      = "MD5、Base64、数据缓存、app更新、app基本信息获取封装以及对Array、Dictionary、URL、String、基本数据类型等进行常用扩展，可运行在iOS、macOS上的基本库"
 
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
   MD5、Base64、数据缓存、app更新、app基本信息获取封装以及对Array、Dictionary、URL、String、基本数据类型等进行常用扩展，可运行在iOS、macOS上的基本库。
                    DESC
 
-  spec.homepage     = "https://github.com/ZuopanYao/BasicKit"
+  spec.homepage     = "https://github.com/ZuopanYao/CacheKit"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -80,7 +80,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/ZuopanYao/BasicKit.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/ZuopanYao/CacheKit.git", :tag => "#{spec.version}" }
   spec.swift_versions = "5.0"
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

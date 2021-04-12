@@ -17,6 +17,28 @@ public class CKMemory: NSObject {
         CKValue(memory[key.value])
     }
     
+    public subscript<T: NSObject & NSCoding>(Base: T.Type) -> T? {
+        get { memory["\(Base.self)"] as? T }
+        set {
+            if newValue == nil {
+                remove(key: CKKey("\(Base.self)"))
+                return
+            }
+            memory["\(Base.self)"] = newValue
+        }
+    }
+    
+    public subscript<T: Codable>(Base: T.Type) -> T? {
+        get { memory["\(Base.self)"] as? T }
+        set {
+            if newValue == nil {
+                remove(key: CKKey("\(Base.self)"))
+                return
+            }
+            memory["\(Base.self)"] = newValue
+        }
+    }
+    
     public func set(value: Any?, key: CKKey) {
         if value == nil {
             remove(key: key)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CKKey {
+public class CKKey: NSObject {
         
     var value: String
     public init(_ value: String) {
@@ -18,12 +18,6 @@ public struct CKKey {
 
 /// CacheKit
 public struct CK {
-    
-    /// 临时缓存管理
-    public static let cacher = CKStorage.shared
-    
-    /// 持久性缓存管理
-    public static let storager = CKCacher.shared
     
     /// 高速缓存，app重启或崩溃数据将丢失
     public static let memory = CKMemory.shared

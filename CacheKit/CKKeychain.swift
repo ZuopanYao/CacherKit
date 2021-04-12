@@ -20,12 +20,50 @@ public class CKKeychain: NSObject {
         return Keychain(service: "\(bundleID).CacheKit.Keychain")
     }()
     
-    public subscript(key: CKKey) -> CKValue {
+    public subscript(key: CKKey) -> CKKeychainValue {
         
         guard let value = keychain[key.value] else {
             return CKKeychainValue(keychain[data: key.value])
         }
         return CKKeychainValue(value)
+    }
+    
+    public subscript<T: NSObject & NSCoding>(Base: T.Type) -> T? {
+        get {
+            guard let data = keychain[data: "\(Base.self)"] else {
+                return nil
+            }
+            return T.ck.unarchive(data)
+        }
+        set {
+            if newValue == nil {
+                remove(key: CKKey("\(Base.self)"))
+                return
+            }
+            keychain[data: "\(Base.self)"] = newValue?.ck.archived()
+        }
+    }
+    
+    public subscript<T: Codable>(Base: T.Type) -> T? {
+        get {
+            guard let data = keychain[data: "\(Base.self)"] else {
+                return nil
+            }
+            
+            do { return try JSONDecoder().decode(Base.self, from: data) }
+            catch { CKLog(error) }
+            return nil
+        }
+        set {
+            if newValue == nil {
+                remove(key: CKKey("\(Base.self)"))
+                return
+            }
+            do {
+                let data = try JSONEncoder().encode(newValue)
+                keychain[data: "\(Base.self)"] = data }
+            catch { CKLog(error) }
+        }
     }
     
     /// Only Int、Double、Float、String、Data、[Int]、[Double]、[Float]、[String]
@@ -71,8 +109,13 @@ public class CKKeychainValue: CKValue {
     }
     
     public override var stringArray: [String]? {
+        
         guard let string = string else {
             return nil
+        }
+        
+        guard string.contains("[") else {
+            return [string]
         }
         
         var offsetCount = 1
@@ -114,6 +157,13 @@ public class CKKeychainValue: CKValue {
             return arrayDouble.map { Int($0) } as? [T]
         }
         return nil
+    }
+    
+    public override var number: NSNumber? {
+        guard let double = double else {
+            return nil
+        }
+        return NSNumber(value: double)
     }
 }
 

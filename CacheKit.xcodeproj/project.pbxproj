@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,11 +19,11 @@
 		B90FD98A26232C7A000D1E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90FD98826232C7A000D1E52 /* Main.storyboard */; };
 		B90FD98C26232C7D000D1E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B90FD98B26232C7D000D1E52 /* Assets.xcassets */; };
 		B90FD98F26232C7D000D1E52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90FD98D26232C7D000D1E52 /* LaunchScreen.storyboard */; };
-		B90FD9A026232F82000D1E52 /* CKType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD99E26232F82000D1E52 /* CKType.swift */; };
-		B90FD9A126232F82000D1E52 /* CKObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD99F26232F82000D1E52 /* CKObject.swift */; };
-		B90FD9A426232F96000D1E52 /* CKCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A326232F96000D1E52 /* CKCacher.swift */; };
+		B90FD9A126232F82000D1E52 /* CKCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD99F26232F82000D1E52 /* CKCoding.swift */; };
 		B90FD9A726232FBA000D1E52 /* CacheKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A626232FBA000D1E52 /* CacheKit.swift */; };
 		B90FD9AA26232FD9000D1E52 /* CKConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A926232FD9000D1E52 /* CKConsole.swift */; };
+		B9882B3A26248C7600FE47BC /* TestOC.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882B3926248C7600FE47BC /* TestOC.m */; };
+		B9882B3E26248CE300FE47BC /* MyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9882B3D26248CE300FE47BC /* MyCache.swift */; };
 		CDC0DE83ED849C334D8F2A35 /* Pods_CacheKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2B6DC744919593157F8715 /* Pods_CacheKit.framework */; };
 		F15AF6A6B7B59C7EE47A2949 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 284C635715A288D7C141F1BB /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -61,11 +61,13 @@
 		B90FD98B26232C7D000D1E52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B90FD98E26232C7D000D1E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B90FD99026232C7D000D1E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B90FD99E26232F82000D1E52 /* CKType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKType.swift; sourceTree = "<group>"; };
-		B90FD99F26232F82000D1E52 /* CKObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKObject.swift; sourceTree = "<group>"; };
-		B90FD9A326232F96000D1E52 /* CKCacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKCacher.swift; sourceTree = "<group>"; };
+		B90FD99F26232F82000D1E52 /* CKCoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKCoding.swift; sourceTree = "<group>"; };
 		B90FD9A626232FBA000D1E52 /* CacheKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKit.swift; sourceTree = "<group>"; };
 		B90FD9A926232FD9000D1E52 /* CKConsole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKConsole.swift; sourceTree = "<group>"; };
+		B9882B3726248C7600FE47BC /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		B9882B3826248C7600FE47BC /* TestOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestOC.h; sourceTree = "<group>"; };
+		B9882B3926248C7600FE47BC /* TestOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestOC.m; sourceTree = "<group>"; };
+		B9882B3D26248CE300FE47BC /* MyCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCache.swift; sourceTree = "<group>"; };
 		F63403FCD10E83867D3C599E /* Pods-CacheKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CacheKit.release.xcconfig"; path = "Target Support Files/Pods-CacheKit/Pods-CacheKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,10 +137,8 @@
 		B90FD96F26232B8F000D1E52 /* CacheKit */ = {
 			isa = PBXGroup;
 			children = (
-				B90FD99F26232F82000D1E52 /* CKObject.swift */,
-				B90FD9A326232F96000D1E52 /* CKCacher.swift */,
+				B90FD99F26232F82000D1E52 /* CKCoding.swift */,
 				B90FD9A926232FD9000D1E52 /* CKConsole.swift */,
-				B90FD99E26232F82000D1E52 /* CKType.swift */,
 				1815C7F82623F23E00A4CE42 /* CKValue.swift */,
 				1815C7FB2623F77300A4CE42 /* CKDisk.swift */,
 				1815C8262624027E00A4CE42 /* CKMemory.swift */,
@@ -156,10 +156,14 @@
 				B90FD98226232C7A000D1E52 /* AppDelegate.swift */,
 				B90FD98426232C7A000D1E52 /* SceneDelegate.swift */,
 				B90FD98626232C7A000D1E52 /* ViewController.swift */,
+				B9882B3D26248CE300FE47BC /* MyCache.swift */,
+				B9882B3826248C7600FE47BC /* TestOC.h */,
+				B9882B3926248C7600FE47BC /* TestOC.m */,
 				B90FD98826232C7A000D1E52 /* Main.storyboard */,
 				B90FD98B26232C7D000D1E52 /* Assets.xcassets */,
 				B90FD98D26232C7D000D1E52 /* LaunchScreen.storyboard */,
 				B90FD99026232C7D000D1E52 /* Info.plist */,
+				B9882B3726248C7600FE47BC /* Example-Bridging-Header.h */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -232,6 +236,7 @@
 					};
 					B90FD97F26232C7A000D1E52 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
@@ -344,9 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1815C8272624027E00A4CE42 /* CKMemory.swift in Sources */,
-				B90FD9A426232F96000D1E52 /* CKCacher.swift in Sources */,
-				B90FD9A026232F82000D1E52 /* CKType.swift in Sources */,
-				B90FD9A126232F82000D1E52 /* CKObject.swift in Sources */,
+				B90FD9A126232F82000D1E52 /* CKCoding.swift in Sources */,
 				B90FD9A726232FBA000D1E52 /* CacheKit.swift in Sources */,
 				B90FD9AA26232FD9000D1E52 /* CKConsole.swift in Sources */,
 				1815C7F92623F23E00A4CE42 /* CKValue.swift in Sources */,
@@ -360,6 +363,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B90FD98726232C7A000D1E52 /* ViewController.swift in Sources */,
+				B9882B3A26248C7600FE47BC /* TestOC.m in Sources */,
+				B9882B3E26248CE300FE47BC /* MyCache.swift in Sources */,
 				B90FD98326232C7A000D1E52 /* AppDelegate.swift in Sources */,
 				B90FD98526232C7A000D1E52 /* SceneDelegate.swift in Sources */,
 			);
@@ -578,6 +583,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F6Z3RQ3U65;
 				INFOPLIST_FILE = Example/Info.plist;
@@ -588,6 +594,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.yaozuopan.iOS.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example/Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -599,6 +607,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F6Z3RQ3U65;
 				INFOPLIST_FILE = Example/Info.plist;
@@ -609,6 +618,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.yaozuopan.iOS.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example/Example-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

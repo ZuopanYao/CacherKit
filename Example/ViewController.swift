@@ -28,6 +28,11 @@ class Test: NSObject, NSCoding {
     }
 }
 
+class SwiftTest: Codable {
+    var name: String = "klsfkdslfk"
+    var age: Int = 999
+}
+
 extension CKKey {
     static let mykey: CKKey = .init("mykey")
     static let mykeyData: CKKey = .init("mykeydata")
@@ -41,19 +46,22 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let t = Test()
-        t.age = 88
-        t.name = "kgamklg"
+        t.age = 8
+        t.name = "1111111gamklg"
         
-        let data = t.ck.archived()
         
-        print(data)
-        CKKeychain.shared.set(value: data, key: .test)
+        let test = SwiftTest()
+        //let data = t.ck.archived()
         
+        //print(data)
+        //CKMemory.shared[SwiftTest.self] = test
+        CKKeychain.shared.set(value: 1334, key: CKKey.mykey1)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             
-            let value = CKKeychain.shared[.test]
-            let test = Test.ck.unarchive(value.data!)
-            print("\(test?.name) -- \(test?.age)")
+            let value = CKKeychain.shared[.mykey1] //CKKeychain.shared[.test]
+            //let test = Test.ck.unarchive(value.data!)
+            //print("\(test?.name) -- \(test?.age)")
             print("bool         = \(value.bool)")
             print("any          = \(value.any)")
             print("string       = \(value.string)")
@@ -67,7 +75,7 @@ class ViewController: UIViewController {
             print("array        = \(value.array(Int.self))")
             print("url          = \(value.url)")
             print("arrayS       = \(value.array(String.self))")
-            
+
             print("arrayDouble  = \(value.array(Double.self))")
             print("arrayFloat   = \(value.array(Float.self))")
             print("arrayInt     = \(value.array(Int.self))")

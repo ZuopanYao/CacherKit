@@ -21,10 +21,14 @@ public class CKKeychain: NSObject {
     }()
     
     public subscript(key: CKKey) -> CKValue {
-        return CKKeychainValue(keychain[key.value])
+        
+        guard let value = keychain[key.value] else {
+            return CKKeychainValue(keychain[data: key.value])
+        }
+        return CKKeychainValue(value)
     }
     
-    /// Only Int、Double、Float、String、Data
+    /// Only Int、Double、Float、String、Data、[Int]、[Double]、[Float]、[String]
     public func set(value: Any?, key: CKKey) {
         if value == nil {
             remove(key: key)
@@ -62,12 +66,54 @@ public class CKKeychainValue: CKValue {
     }
     
     public override var data: Data? {
-        guard let string = string else { return nil }
+        guard let string = string else { return base as? Data }
         return string.data(using: .utf8)
     }
     
     public override var stringArray: [String]? {
-        Array.ini
+        guard let string = string else {
+            return nil
+        }
+        
+        var offsetCount = 1
+        var separated = ", "
+        
+        if string.hasPrefix("[\"") {
+            offsetCount = 2
+            separated = "\", \""
+        }
+        
+        let startIndex = string.index(string.startIndex, offsetBy: offsetCount)
+        let endIndex = string.index(string.endIndex, offsetBy: -offsetCount)
+        let subString = string[startIndex..<endIndex]
+        
+        return "\(subString)".components(separatedBy: separated)
+    }
+    
+    /// Only [Int]、[Double]、 [Float]、[String]
+    public override func array<T>(_ Base: T.Type) -> [T]? {
+        
+        guard let datas = stringArray else {
+            return nil
+        }
+        
+        if Base == String.self {
+            return datas as? [T]
+        }
+        
+        let arrayDouble = datas.compactMap { Double($0) }
+        if Base == Double.self {
+            return arrayDouble as? [T]
+        }
+        
+        if Base == Float.self {
+            return arrayDouble.map { Float($0) } as? [T]
+        }
+        
+        if Base == Int.self {
+            return arrayDouble.map { Int($0) } as? [T]
+        }
         return nil
     }
 }
+

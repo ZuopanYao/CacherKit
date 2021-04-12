@@ -9,9 +9,7 @@
 import Foundation
 
 public struct CKKey {
-    
-    static let lang = CKKey("AppleLanguages")
-    
+        
     var value: String
     public init(_ value: String) {
         self.value = value
@@ -26,6 +24,15 @@ public struct CK {
     
     /// 持久性缓存管理
     public static let storager = CKCacher.shared
+    
+    /// 高速缓存，app重启或崩溃数据将丢失
+    public static let memory = CKMemory.shared
+    
+    /// 持久性缓存
+    public static let disk = CKDisk.shared
+    
+    /// 钥匙串访问
+    public static let keychain = CKKeychain.shared
 }
 
 public struct CacheKit<Base> {
@@ -40,28 +47,19 @@ public protocol CacheKitCompatible {
     
     associatedtype CompatibleType
     
-    var bk: CacheKit<CompatibleType> { get }
-    static var bk: CacheKit<CompatibleType>.Type { get }
+    var ck: CacheKit<CompatibleType> { get }
+    static var ck: CacheKit<CompatibleType>.Type { get }
 }
 
 public extension CacheKitCompatible {
     
-    var bk: CacheKit<Self> {
+    var ck: CacheKit<Self> {
         get { return CacheKit(self) }
     }
     
-    static var bk: CacheKit<Self>.Type {
+    static var ck: CacheKit<Self>.Type {
         get { return CacheKit<Self>.self }
     }
 }
 
-extension String: CacheKitCompatible { }
-extension Data: CacheKitCompatible { }
-extension CKObject: CacheKitCompatible { }
-extension Int: CacheKitCompatible { }
-extension Float: CacheKitCompatible { }
-extension Double: CacheKitCompatible { }
-extension Array: CacheKitCompatible { }
-extension URL: CacheKitCompatible { }
-extension CKType: CacheKitCompatible { }
-extension Date: CacheKitCompatible { }
+extension NSObject: CacheKitCompatible { }

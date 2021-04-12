@@ -8,11 +8,7 @@
 
 import Foundation
 
-open class CKType {
-    public init() { }
-}
-
-public extension CacheKit where Base: CKType, Base: Codable {
+public extension CacheKit where Base: Codable {
     
     static func fromJSON(data: Data? = nil, string: String? = nil) -> Base? {
         

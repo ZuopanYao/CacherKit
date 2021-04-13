@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import CacheKit
+import CacherKit
 
 class Test: NSObject, NSCoding {
     

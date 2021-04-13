@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint CacheKit.podspec' to ensure this is a
+#  Be sure to run `pod spec lint CacherKit.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see https://guides.cocoapods.org/syntax/podspec.html
@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "CacheKit"
+  spec.name         = "CacherKit"
   spec.version      = "1.0.0"
   spec.summary      = "iOS 简单缓存管理库，支持内存、磁盘、钥匙串，接口统一"
 
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
   iOS 简单缓存管理库，支持内存、磁盘、钥匙串，接口统一。
                      DESC
 
-  spec.homepage     = "https://github.com/ZuopanYao/CacheKit"
+  spec.homepage     = "https://github.com/ZuopanYao/CacherKit"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -80,7 +80,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/ZuopanYao/CacheKit.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/ZuopanYao/CacherKit.git", :tag => "#{spec.version}" }
   spec.swift_versions = "5.0"
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,7 +91,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "CacheKit/*.{h,swift}"
+  spec.source_files  = "CacherKit/*.{h,swift}"
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"

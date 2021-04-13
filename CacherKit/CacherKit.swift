@@ -1,6 +1,6 @@
 //
-//  CacheKit.swift
-//  CacheKit
+//  CacherKit.swift
+//  CacherKit
 //
 //  Created by Harvey on 2019/6/5.
 //  Copyright © 2019 姚作潘/Harvey. All rights reserved.
@@ -16,7 +16,7 @@ public class CKKey: NSObject {
     }
 }
 
-/// CacheKit
+/// CacherKit
 public struct CK {
     
     /// 高速缓存，app重启或崩溃数据将丢失

@@ -1,6 +1,6 @@
 //
 //  CKKeychain.swift
-//  CacheKit
+//  CacherKit
 //
 //  Created by Harvey on 2021/4/12.
 //
@@ -17,7 +17,7 @@ public class CKKeychain: NSObject {
     private override init() { super.init() }
     
     lazy var keychain: Keychain = {
-        return Keychain(service: "\(bundleID).CacheKit.Keychain")
+        return Keychain(service: "\(bundleID).CacherKit.Keychain")
     }()
     
     public subscript(key: CKKey) -> CKKeychainValue {

@@ -1,6 +1,6 @@
 //
 //  CKConsole.swift
-//  CacheKit
+//  CacherKit
 //
 //  Created by Harvey on 2019/6/10.
 //  Copyright © 2019 姚作潘/Harvey. All rights reserved.
@@ -21,10 +21,10 @@ class CKConsole {
     var dateString: String { formatter.string(from: Date()) }
 }
 
-/// CacheKit 自定义打印函数
+/// CacherKit 自定义打印函数
 func CKLog(_ items: Any..., file: String = #file, method: String = #function, line: Int = #line) {
     
-    var string = "[CacheKit] \(CKConsole.shared.dateString) in \(file.split(separator: "/").last!) \(method) [Line \(line)]:\n"
+    var string = "[CacherKit] \(CKConsole.shared.dateString) in \(file.split(separator: "/").last!) \(method) [Line \(line)]:\n"
     print(string, terminator: "")
     
     for item in items {

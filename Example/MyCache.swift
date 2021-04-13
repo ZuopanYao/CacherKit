@@ -5,11 +5,13 @@
 //  Created by Harvey on 2021/4/12.
 //
 
-import CacheKit
+import Foundation
+import CacherKit
 
 extension CKKey {
     @objc static let mykey1: CKKey = .init("mykey1")
     @objc static let mykey2: CKKey = .init("mykey2")
+    @objc static let mykey3: CKKey = .init("mykey3")
 }
 
 @objc class MyDisk: NSObject {

@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "CacheKit"
   spec.version      = "1.0.2"
-  spec.summary      = "MD5、Base64、数据缓存、app更新、app基本信息获取封装以及对Array、Dictionary、URL、String、基本数据类型等进行常用扩展，可运行在iOS、macOS上的基本库"
+  spec.summary      = "iOS 简单缓存管理库，支持内存、磁盘、钥匙串，接口统一"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,8 +25,8 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-  MD5、Base64、数据缓存、app更新、app基本信息获取封装以及对Array、Dictionary、URL、String、基本数据类型等进行常用扩展，可运行在iOS、macOS上的基本库。
-                   DESC
+  iOS 简单缓存管理库，支持内存、磁盘、钥匙串，接口统一。
+                     DESC
 
   spec.homepage     = "https://github.com/ZuopanYao/CacheKit"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -68,8 +68,8 @@ Pod::Spec.new do |spec|
   # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  spec.ios.deployment_target = "10.0"
-  spec.osx.deployment_target = "10.12"
+  spec.ios.deployment_target = "11.0"
+  #spec.osx.deployment_target = "10.12"
   # spec.watchos.deployment_target = "2.0"
   # spec.tvos.deployment_target = "9.0"
 
@@ -91,7 +91,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Source", "Source/*/*.{h,swift}"
+  spec.source_files  = "CacheKit/*.{h,swift}"
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
@@ -134,7 +134,7 @@ Pod::Spec.new do |spec|
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # spec.dependency "JSONKit", "> 1.4"
-  spec.dependency "Alamofire", ">= 4.9.1"
-  spec.dependency "KeychainAccess", ">= 4.1.0"
+  #spec.dependency "Alamofire", ">= 4.9.1"
+  spec.dependency "KeychainAccess", ">= 4.2.2"
 
 end

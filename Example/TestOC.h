@@ -9,6 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface ObjectCoding : NSObject<NSCoding>
+
+@property (strong) NSString* name;
+@property (assign) NSInteger age;
+
+@end
+
+
 @interface TestOC : NSObject
 
 @end

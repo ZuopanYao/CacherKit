@@ -13,7 +13,7 @@ public class CKKeychain: NSObject {
     var bundleID: String {
         Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String
     }
-    public static let shared: CKKeychain = .init()
+    @objc public static let shared: CKKeychain = .init()
     private override init() { super.init() }
     
     lazy var keychain: Keychain = {
@@ -33,14 +33,14 @@ public class CKKeychain: NSObject {
             guard let data = keychain[data: "\(Base.self)"] else {
                 return nil
             }
-            return T.ck.unarchive(data)
+            return unarchive(data) as? T
         }
         set {
             if newValue == nil {
-                remove(key: CKKey("\(Base.self)"))
+                remove(CKKey("\(Base.self)"))
                 return
             }
-            keychain[data: "\(Base.self)"] = newValue?.ck.archived()
+            keychain[data: "\(Base.self)"] = archived(newValue!)
         }
     }
     
@@ -56,7 +56,7 @@ public class CKKeychain: NSObject {
         }
         set {
             if newValue == nil {
-                remove(key: CKKey("\(Base.self)"))
+                remove(CKKey("\(Base.self)"))
                 return
             }
             do {
@@ -67,9 +67,9 @@ public class CKKeychain: NSObject {
     }
     
     /// Only Int、Double、Float、String、Data、[Int]、[Double]、[Float]、[String]
-    public func set(value: Any?, key: CKKey) {
+    @objc public func set(_ value: Any?, key: CKKey) {
         if value == nil {
-            remove(key: key)
+            remove(key)
             return
         }
         guard let data = value as? Data else {
@@ -79,10 +79,33 @@ public class CKKeychain: NSObject {
         keychain[data: key.value] = data
     }
     
-    public func remove(key: CKKey) {
+    @objc public func remove(_ key: CKKey) {
         do {
             try keychain.remove(key.value)
         } catch { CKLog(error) }
+    }
+    
+    // MARK: - Additional supprt for ObjC' NSCoding
+    @objc public func setCoding(_ value: Any?, key: CKKey) {
+        if value == nil {
+            remove(key)
+            return
+        }
+        
+        keychain[data: key.value] = archived(value!)
+    }
+    
+    @objc public func getCoding(_ key: CKKey) -> Any? {
+        guard let data = keychain[data: key.value] else {
+            return nil
+        }
+        
+        return unarchive(data)
+    }
+    
+    // MARK: - Additional supprt for ObjC get
+    @objc public func value(_ key: CKKey) -> CKKeychainValue {
+        return self[key]
     }
 }
 

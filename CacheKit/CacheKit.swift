@@ -29,31 +29,13 @@ public struct CK {
     public static let keychain = CKKeychain.shared
 }
 
-public struct CacheKit<Base> {
-    
-    var base: Base
-    fileprivate init(_ base: Base) {
-        self.base = base
-    }    
+// MARK: -  归档
+func archived(_ base: Any) -> Data {
+    return NSKeyedArchiver.archivedData(withRootObject: base)
 }
 
-public protocol CacheKitCompatible {
-    
-    associatedtype CompatibleType
-    
-    var ck: CacheKit<CompatibleType> { get }
-    static var ck: CacheKit<CompatibleType>.Type { get }
+// 解档
+func unarchive(_ data: Data) -> Any? {
+    return NSKeyedUnarchiver.unarchiveObject(with: data)
 }
 
-public extension CacheKitCompatible {
-    
-    var ck: CacheKit<Self> {
-        get { return CacheKit(self) }
-    }
-    
-    static var ck: CacheKit<Self>.Type {
-        get { return CacheKit<Self>.self }
-    }
-}
-
-extension NSObject: CacheKitCompatible { }

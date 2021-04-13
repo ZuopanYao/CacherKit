@@ -9,7 +9,7 @@ import Foundation
 
 public class CKDisk: NSObject {
     
-    public static let shared: CKDisk = .init()
+    @objc public static let shared: CKDisk = .init()
     private override init() { super.init() }
     
     private let disk = UserDefaults.standard
@@ -22,14 +22,14 @@ public class CKDisk: NSObject {
             guard let data = disk.data(forKey: "\(Base.self)") else {
                 return nil
             }
-            return T.ck.unarchive(data)
+            return unarchive(data) as? T
         }
         set {
             if newValue == nil {
-                remove(key: CKKey("\(Base.self)"))
+                remove(CKKey("\(Base.self)"))
                 return
             }
-            disk.setValue(newValue?.ck.archived(), forKey: "\(Base.self)")
+            disk.setValue(archived(newValue!), forKey: "\(Base.self)")
         }
     }
     
@@ -45,7 +45,7 @@ public class CKDisk: NSObject {
         }
         set {
             if newValue == nil {
-                remove(key: CKKey("\(Base.self)"))
+                remove(CKKey("\(Base.self)"))
                 return
             }
             do {
@@ -55,15 +55,38 @@ public class CKDisk: NSObject {
         }
     }
     
-    public func set(value: Any?, key: CKKey) {
+    @objc public func set(_ value: Any?, key: CKKey) {
         if value == nil {
-            remove(key: key)
+            remove(key)
             return
         }
         disk.setValue(value, forKey: key.value)
     }
     
-    public func remove(key: CKKey) {
+    @objc public func remove(_ key: CKKey) {
         disk.removeObject(forKey: key.value)
+    }
+    
+    // MARK: - Additional supprt for ObjC' NSCoding
+    @objc public func setCoding(_ value: Any?, key: CKKey) {
+        if value == nil {
+            remove(key)
+            return
+        }
+        
+        disk.setValue(archived(value!), forKey: key.value)
+    }
+    
+    @objc public func getCoding(_ key: CKKey) -> Any? {
+        guard let data = disk.data(forKey: key.value) else {
+            return nil
+        }
+        
+        return unarchive(data)
+    }
+    
+    // MARK: - Additional supprt for ObjC get
+    @objc public func value(_ key: CKKey) -> CKValue {
+        return self[key]
     }
 }

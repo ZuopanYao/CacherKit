@@ -9,7 +9,7 @@ import Foundation
 
 public class CKMemory: NSObject {
     
-    public static let shared: CKMemory = .init()
+    @objc public static let shared: CKMemory = .init()
     private override init() { super.init() }
     
     private var memory: [String: Any] = [:]
@@ -21,7 +21,7 @@ public class CKMemory: NSObject {
         get { memory["\(Base.self)"] as? T }
         set {
             if newValue == nil {
-                remove(key: CKKey("\(Base.self)"))
+                remove(CKKey("\(Base.self)"))
                 return
             }
             memory["\(Base.self)"] = newValue
@@ -32,22 +32,27 @@ public class CKMemory: NSObject {
         get { memory["\(Base.self)"] as? T }
         set {
             if newValue == nil {
-                remove(key: CKKey("\(Base.self)"))
+                remove(CKKey("\(Base.self)"))
                 return
             }
             memory["\(Base.self)"] = newValue
         }
     }
     
-    public func set(value: Any?, key: CKKey) {
+    @objc public func set(_ value: Any?, key: CKKey) {
         if value == nil {
-            remove(key: key)
+            remove(key)
             return
         }
         memory[key.value] = value
     }
     
-    public func remove(key: CKKey) {
+    @objc public func remove(_ key: CKKey) {
         memory.removeValue(forKey: key.value)
+    }
+    
+    // MARK: - Additional supprt for ObjC get
+    @objc public func value(_ key: CKKey) -> CKValue {
+        return self[key]
     }
 }

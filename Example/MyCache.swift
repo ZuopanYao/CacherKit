@@ -8,14 +8,15 @@
 import CacheKit
 
 extension CKKey {
-    @objc static let mykey1: CKKey = .init("mykey")
+    @objc static let mykey1: CKKey = .init("mykey1")
+    @objc static let mykey2: CKKey = .init("mykey2")
 }
 
 @objc class MyDisk: NSObject {
     
     private static let disk = CKDisk.shared
     @objc class func setValue(_ value: Any?, key: CKKey) {
-        disk.set(value: value, key: key)
+        disk.set(value, key: key)
     }
     
     @objc class func value(key: CKKey) -> CKValue {
@@ -27,7 +28,7 @@ extension CKKey {
     
     private static let memory = CKMemory.shared
     @objc class func setValue(_ value: Any?, key: CKKey) {
-        memory.set(value: value, key: key)
+        memory.set(value, key: key)
     }
     
     @objc class func value(key: CKKey) -> CKValue {
@@ -39,7 +40,7 @@ extension CKKey {
     
     private static let keychain = CKKeychain.shared
     @objc class func setValue(_ value: Any?, key: CKKey) {
-        keychain.set(value: value, key: key)
+        keychain.set(value, key: key)
     }
     
     @objc class func value(key: CKKey) -> CKKeychainValue {

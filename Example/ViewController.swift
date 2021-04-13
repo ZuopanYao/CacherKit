@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         
         //print(data)
         //CKMemory.shared[SwiftTest.self] = test
-        CKKeychain.shared.set(value: 1334, key: CKKey.mykey1)
+        CKKeychain.shared.set(1334, key: CKKey.mykey1)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             

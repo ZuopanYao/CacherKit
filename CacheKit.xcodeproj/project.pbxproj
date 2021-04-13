@@ -19,7 +19,6 @@
 		B90FD98A26232C7A000D1E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90FD98826232C7A000D1E52 /* Main.storyboard */; };
 		B90FD98C26232C7D000D1E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B90FD98B26232C7D000D1E52 /* Assets.xcassets */; };
 		B90FD98F26232C7D000D1E52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90FD98D26232C7D000D1E52 /* LaunchScreen.storyboard */; };
-		B90FD9A126232F82000D1E52 /* CKCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD99F26232F82000D1E52 /* CKCoding.swift */; };
 		B90FD9A726232FBA000D1E52 /* CacheKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A626232FBA000D1E52 /* CacheKit.swift */; };
 		B90FD9AA26232FD9000D1E52 /* CKConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90FD9A926232FD9000D1E52 /* CKConsole.swift */; };
 		B9882B3A26248C7600FE47BC /* TestOC.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882B3926248C7600FE47BC /* TestOC.m */; };
@@ -61,7 +60,6 @@
 		B90FD98B26232C7D000D1E52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B90FD98E26232C7D000D1E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B90FD99026232C7D000D1E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B90FD99F26232F82000D1E52 /* CKCoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKCoding.swift; sourceTree = "<group>"; };
 		B90FD9A626232FBA000D1E52 /* CacheKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKit.swift; sourceTree = "<group>"; };
 		B90FD9A926232FD9000D1E52 /* CKConsole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKConsole.swift; sourceTree = "<group>"; };
 		B9882B3726248C7600FE47BC /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 		B90FD96F26232B8F000D1E52 /* CacheKit */ = {
 			isa = PBXGroup;
 			children = (
-				B90FD99F26232F82000D1E52 /* CKCoding.swift */,
 				B90FD9A926232FD9000D1E52 /* CKConsole.swift */,
 				1815C7F82623F23E00A4CE42 /* CKValue.swift */,
 				1815C7FB2623F77300A4CE42 /* CKDisk.swift */,
@@ -349,7 +346,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1815C8272624027E00A4CE42 /* CKMemory.swift in Sources */,
-				B90FD9A126232F82000D1E52 /* CKCoding.swift in Sources */,
 				B90FD9A726232FBA000D1E52 /* CacheKit.swift in Sources */,
 				B90FD9AA26232FD9000D1E52 /* CKConsole.swift in Sources */,
 				1815C7F92623F23E00A4CE42 /* CKValue.swift in Sources */,

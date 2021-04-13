@@ -29,6 +29,68 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 
 
 ## Usage / 使用
+### Swift
+
+#### Define Your Key
+```
+import CacherKit
+
+extension CKKey {
+    static let mykey: CKKey = .init("mykey")
+}
+
+```
+
+#### Adding an item
+```
+/// Saving to disk (With UserDefaults)
+CK.disk.set("TestString", key: .mykey)
+        
+/// Saving to memory
+CK.memory.set("TestString", key: .mykey)
+        
+/// Saving to keychain
+CK.keychain.set("TestString", key: .mykey)
+```
+
+#### Obtaining an item (subscripting)
+```
+//let value = CK.disk[.mykey]
+//let value = CK.keychain[.mykey]
+let value = CK.memory[.mykey]
+        
+// Convert to String
+let str = value.string
+
+// Convert to Data
+let data = value.data
+```
+
+#### Removing an item
+##### set nil
+```
+ /// Removing from disk (With UserDefaults)
+CK.disk.set(nil, key: .mykey)
+    
+/// Removing from memory
+CK.memory.set(nil, key: .mykey)
+    
+/// Removing from keychain
+CK.keychain.set(nil, key: .mykey)
+```
+
+##### Remove method
+```
+/// Removing from disk (With UserDefaults)
+CK.disk.remove(.mykey)
+    
+/// Removing from memory
+CK.memory.remove(.mykey)
+    
+/// Removing from keychain
+CK.keychain.remove(.mykey)
+```
+
 
 ## License / 许可证
 

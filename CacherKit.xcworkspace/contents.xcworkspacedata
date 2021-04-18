@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/apple/Desktop/project/my/CacheKit/CacherKit.xcodeproj">
+      location = "group:CacherKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:CacherKit.xcodeproj">
    </FileRef>
 </Workspace>

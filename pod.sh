@@ -8,7 +8,7 @@ if [ -z "$1" ]; then
  exit 0
 fi
 
-MODULE='CacheKit'
+MODULE='CacherKit'
 SPECS='Specs'
 
 cp podspec.example $MODULE.podspec

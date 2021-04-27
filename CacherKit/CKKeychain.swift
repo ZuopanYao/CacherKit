@@ -28,22 +28,6 @@ public class CKKeychain: NSObject {
         return CKKeychainValue(value)
     }
     
-    public subscript<T: NSObject & NSCoding>(Base: T.Type) -> T? {
-        get {
-            guard let data = keychain[data: "\(Base.self)"] else {
-                return nil
-            }
-            return unarchive(data) as? T
-        }
-        set {
-            if newValue == nil {
-                remove(CKKey("\(Base.self)"))
-                return
-            }
-            keychain[data: "\(Base.self)"] = archived(newValue!)
-        }
-    }
-    
     public subscript<T: Codable>(Base: T.Type) -> T? {
         get {
             guard let data = keychain[data: "\(Base.self)"] else {
@@ -83,24 +67,6 @@ public class CKKeychain: NSObject {
         do {
             try keychain.remove(key.value)
         } catch { CKLog(error) }
-    }
-    
-    // MARK: - Additional supprt for ObjC' NSCoding
-    @objc public func setCoding(_ value: Any?, key: CKKey) {
-        if value == nil {
-            remove(key)
-            return
-        }
-        
-        keychain[data: key.value] = archived(value!)
-    }
-    
-    @objc public func getCoding(_ key: CKKey) -> Any? {
-        guard let data = keychain[data: key.value] else {
-            return nil
-        }
-        
-        return unarchive(data)
     }
     
     // MARK: - Additional supprt for ObjC get

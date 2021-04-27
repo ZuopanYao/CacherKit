@@ -29,13 +29,3 @@ public struct CK {
     public static let keychain = CKKeychain.shared
 }
 
-// MARK: -  归档
-func archived(_ base: Any) -> Data {
-    return NSKeyedArchiver.archivedData(withRootObject: base)
-}
-
-// 解档
-func unarchive(_ data: Data) -> Any? {
-    return NSKeyedUnarchiver.unarchiveObject(with: data)
-}
-

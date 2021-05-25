@@ -13,7 +13,7 @@ private let cachers: [CKCacheProtocol.Type] = [CKDisk.self, CKMemory.self, CKKey
 public enum CKCache: Int {
     case disk = 0
     case memory = 1
-    case keychain = 3
+    case keychain = 2
 }
 
 extension Encodable {

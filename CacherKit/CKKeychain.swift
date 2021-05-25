@@ -8,151 +8,157 @@
 import Foundation
 import KeychainAccess
 
-public class CKKeychain: NSObject {
+public class CKKeychain {
     
-    var bundleID: String {
-        Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String
-    }
-    @objc public static let shared: CKKeychain = .init()
-    private override init() { super.init() }
-    
-    lazy var keychain: Keychain = {
+    static let bundleID: String = Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String
+    static let keychain: Keychain = {
         return Keychain(service: "\(bundleID).CacherKit.Keychain")
     }()
     
-    public subscript(key: CKKey) -> CKKeychainValue {
-        
-        guard let value = keychain[key.value] else {
-            return CKKeychainValue(keychain[data: key.value])
-        }
-        return CKKeychainValue(value)
+    private var key: CKKey
+    
+    required init(key: CKKey) {
+        self.key = key
     }
     
-    public subscript<T: Codable>(Base: T.Type) -> T? {
+    public func remove() {
+        do {
+            try Self.keychain.remove(key.value)
+        } catch {
+            echo(error)
+        }
+    }
+}
+
+extension CKKey {
+    
+    /// 保存到钥匙串
+    public var keychain: CKKeychain {
+        return .init(key: self)
+    }
+}
+
+extension CKKeychain: CKCacheProtocol {
+    
+    public var url: URL? {
         get {
-            guard let data = keychain[data: "\(Base.self)"] else {
+            guard let string = string else { return nil }
+            return URL(string: string)
+        }
+        set {
+            guard let newValue = newValue else { return remove() }
+            string = newValue.absoluteString
+        }
+    }
+    
+    public var bool: Bool {
+        get { string == "true" }
+        set { string = "\(newValue)" }
+    }
+    
+    public var string: String? {
+        get { Self.keychain[key.value] }
+        set {
+            guard let newValue = newValue else { return remove() }
+            Self.keychain[key.value] = newValue
+        }
+    }
+    
+    public var data: Data? {
+        get { Self.keychain[data: key.value] }
+        set {
+            guard let newValue = newValue else { return remove() }
+            Self.keychain[data: key.value] = newValue
+        }
+    }
+    
+    public var int: Int? {
+        get {
+            guard let double = double else { return nil }
+            return Int(double)
+        }
+        set {
+            guard let newValue = newValue else { return remove() }
+            double = Double(newValue)
+        }
+    }
+    
+    public var float: Float? {
+        get {
+            guard let double = double else { return nil }
+            return Float(double)
+        }
+        set {
+            guard let newValue = newValue else { return remove() }
+            double = Double(newValue)
+        }
+    }
+    
+    public var double: Double? {
+        get {
+            guard let string = string else { return nil }
+            return Double(string)
+        }
+        set {
+            guard let newValue = newValue else { return remove() }
+            Self.keychain[key.value] = "\(newValue)"
+        }
+    }
+    
+    public var array: [Any]? {
+        get {
+            echo("Keychain not supprt array get, please use array<T>")
+            return nil
+        }
+        set { echo("Keychain not supprt array set") }
+    }
+    
+    public var stringArray: [String]? {
+        get {
+            guard let string = string else {
                 return nil
             }
             
-            do { return try JSONDecoder().decode(Base.self, from: data) }
-            catch { CKLog(error) }
-            return nil
+            guard string.contains("[") else {
+                return [string]
+            }
+            
+            var offsetCount = 1
+            var separated = ", "
+            
+            if string.hasPrefix("[\"") {
+                offsetCount = 2
+                separated = "\", \""
+            }
+            
+            let startIndex = string.index(string.startIndex, offsetBy: offsetCount)
+            let endIndex = string.index(string.endIndex, offsetBy: -offsetCount)
+            let subString = string[startIndex..<endIndex]
+            
+            return "\(subString)".components(separatedBy: separated)
         }
         set {
-            if newValue == nil {
-                remove(CKKey("\(Base.self)"))
-                return
-            }
-            do {
-                let data = try JSONEncoder().encode(newValue)
-                keychain[data: "\(Base.self)"] = data }
-            catch { CKLog(error) }
+            guard let newValue = newValue else { return remove() }
+            string = "\(newValue)"
         }
     }
     
-    /// Only Int、Double、Float、String、Data、[Int]、[Double]、[Float]、[String]
-    @objc public func set(_ value: Any?, key: CKKey) {
-        if value == nil {
-            remove(key)
-            return
-        }
-        guard let data = value as? Data else {
-            keychain[key.value] = "\(value!)"
-            return
-        }
-        keychain[data: key.value] = data
-    }
-    
-    @objc public func remove(_ key: CKKey) {
-        do {
-            try keychain.remove(key.value)
-        } catch { CKLog(error) }
-    }
-    
-    // MARK: - Additional supprt for ObjC get
-    @objc public func value(_ key: CKKey) -> CKKeychainValue {
-        return self[key]
-    }
-}
-
-public class CKKeychainValue: CKValue {
-    
-    public override var int: Int? {
-        guard let double = double else { return nil }
-        return Int(double)
-    }
-    
-    public override var float: Float? {
-        guard let double = double else { return nil }
-        return Float(double)
-    }
-    
-    public override var double: Double? {
-        guard let string = string else { return nil }
-        return Double(string)
-    }
-    
-    public override var data: Data? {
-        guard let string = string else { return base as? Data }
-        return string.data(using: .utf8)
-    }
-    
-    public override var stringArray: [String]? {
-        
-        guard let string = string else {
+    public var dictionary: [String: Any]? {
+        get {
+            echo("Keychain not supprt dictionary get")
             return nil
         }
-        
-        guard string.contains("[") else {
-            return [string]
-        }
-        
-        var offsetCount = 1
-        var separated = ", "
-        
-        if string.hasPrefix("[\"") {
-            offsetCount = 2
-            separated = "\", \""
-        }
-        
-        let startIndex = string.index(string.startIndex, offsetBy: offsetCount)
-        let endIndex = string.index(string.endIndex, offsetBy: -offsetCount)
-        let subString = string[startIndex..<endIndex]
-        
-        return "\(subString)".components(separatedBy: separated)
+        set { echo("Keychain not supprt dictionary set") }
     }
     
-    /// Only [Int]、[Double]、 [Float]、[String]
-    public override func array<T>(_ Base: T.Type) -> [T]? {
-        
-        guard let datas = stringArray else {
-            return nil
-        }
-        
-        if Base == String.self {
-            return datas as? [T]
-        }
-        
-        let arrayDouble = datas.compactMap { Double($0) }
-        if Base == Double.self {
-            return arrayDouble as? [T]
-        }
-        
-        if Base == Float.self {
-            return arrayDouble.map { Float($0) } as? [T]
-        }
-        
-        if Base == Int.self {
-            return arrayDouble.map { Int($0) } as? [T]
-        }
+    /// Only [Double]、[Float]、[Int]、[String]
+    public func array<T>(_ Type: T.Type) -> [T]? {
+        guard let array = stringArray else { return nil }
+        if Type == String.self { return array as? [T] }
+        let arrayDouble = array.compactMap { Double($0) }
+        if Type == Double.self { return arrayDouble as? [T] }
+        if Type == Float.self { return arrayDouble.compactMap({ Float($0) }) as? [T] }
+        if Type == Int.self { return arrayDouble.compactMap({ Int($0) }) as? [T] }
         return nil
     }
-    
-    public override var number: NSNumber? {
-        guard let double = double else {
-            return nil
-        }
-        return NSNumber(value: double)
-    }
 }
-

@@ -7,52 +7,81 @@
 
 import Foundation
 
-public class CKMemory: NSObject {
+public class CKMemory {
     
-    @objc public static let shared: CKMemory = .init()
-    private override init() { super.init() }
+    private static var memory: [CKKey: Any] = [:]
+    private var key: CKKey
     
-    private var memory: [String: Any] = [:]
-    public subscript(key: CKKey) -> CKValue {
-        CKValue(memory[key.value])
+    required init(key: CKKey) {
+        self.key = key
     }
     
-    public subscript<T: NSObject & NSCoding>(Base: T.Type) -> T? {
-        get { memory["\(Base.self)"] as? T }
-        set {
-            if newValue == nil {
-                remove(CKKey("\(Base.self)"))
-                return
-            }
-            memory["\(Base.self)"] = newValue
-        }
+    public func remove() {
+        Self.memory.removeValue(forKey: key)
+    }
+}
+
+extension CKKey {
+    
+    /// 高速缓存，app重启或崩溃数据将丢失
+    public var memory: CKMemory {
+        return .init(key: self)
+    }
+}
+
+extension CKMemory: CKCacheProtocol {
+    
+    public var url: URL? {
+        get { Self.memory[key] as? URL }
+        set { Self.memory[key] = newValue }
     }
     
-    public subscript<T: Codable>(Base: T.Type) -> T? {
-        get { memory["\(Base.self)"] as? T }
-        set {
-            if newValue == nil {
-                remove(CKKey("\(Base.self)"))
-                return
-            }
-            memory["\(Base.self)"] = newValue
-        }
+    public var bool: Bool {
+        get { Self.memory[key] as? Bool ?? false }
+        set { Self.memory[key] = newValue }
     }
     
-    @objc public func set(_ value: Any?, key: CKKey) {
-        if value == nil {
-            remove(key)
-            return
-        }
-        memory[key.value] = value
+    public var string: String? {
+        get { Self.memory[key] as? String }
+        set { Self.memory[key] = newValue }
     }
     
-    @objc public func remove(_ key: CKKey) {
-        memory.removeValue(forKey: key.value)
+    public var data: Data? {
+        get { Self.memory[key] as? Data }
+        set { Self.memory[key] = newValue }
     }
     
-    // MARK: - Additional supprt for ObjC get
-    @objc public func value(_ key: CKKey) -> CKValue {
-        return self[key]
+    public var int: Int? {
+        get { Self.memory[key] as? Int }
+        set { Self.memory[key] = newValue }
+    }
+    
+    public var float: Float? {
+        get { Self.memory[key] as? Float }
+        set { Self.memory[key] = newValue }
+    }
+    
+    public var double: Double? {
+        get { Self.memory[key] as? Double }
+        set { Self.memory[key] = newValue }
+    }
+    
+    public var array: [Any]? {
+        get { Self.memory[key] as? [Any] }
+        set { Self.memory[key] = newValue }
+    }
+    
+    public var stringArray: [String]? {
+        get { Self.memory[key] as? [String] }
+        set { Self.memory[key] = newValue }
+    }
+    
+    public var dictionary: [String: Any]? {
+        get { Self.memory[key] as? [String: Any] }
+        set { Self.memory[key] = newValue }
+    }
+    
+    public func array<T>(_ Type: T.Type) -> [T]? {
+        return array as? [T]
     }
 }

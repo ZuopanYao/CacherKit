@@ -8,9 +8,9 @@
 
 import Foundation
 
-class CKConsole {
+class CKLogger {
     
-    static let shared = CKConsole()
+    static let shared = CKLogger()
     private init() {
         
         formatter = DateFormatter()
@@ -22,9 +22,9 @@ class CKConsole {
 }
 
 /// CacherKit 自定义打印函数
-func CKLog(_ items: Any..., file: String = #file, method: String = #function, line: Int = #line) {
-    
-    var string = "[CacherKit] \(CKConsole.shared.dateString) in \(file.split(separator: "/").last!) \(method) [Line \(line)]:\n"
+func echo(_ items: Any..., file: String = #file, method: String = #function, line: Int = #line) {
+    objc_sync_enter(CKLogger.shared)
+    var string = "[CacherKit] \(CKLogger.shared.dateString) in \(file.split(separator: "/").last!) \(method) [Line \(line)]:\n"
     print(string, terminator: "")
     
     for item in items {
@@ -33,4 +33,5 @@ func CKLog(_ items: Any..., file: String = #file, method: String = #function, li
         string = string + "\(item)\n"
     }
     print("")
+    objc_sync_exit(CKLogger.shared)
 }

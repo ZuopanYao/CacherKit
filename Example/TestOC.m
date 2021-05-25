@@ -44,17 +44,17 @@
 
 + (void)load {
     
-    ObjectCoding *obj = [[ObjectCoding alloc] init];
-    CKMemory *manager = CKMemory.shared;
-    [manager set:@"testkdfkdk" key:CKKey.mykey2];
-    [manager set:obj key:CKKey.mykey3];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSLog(@"%@", [manager value:CKKey.mykey2].string);
-        NSLog(@"%@", ((ObjectCoding *)[manager value:CKKey.mykey3].any).name);
-        NSLog(@"%d", ((ObjectCoding *)[manager value:CKKey.mykey3].any).age);
-    });
+//    ObjectCoding *obj = [[ObjectCoding alloc] init];
+//    CKMemory *manager = CKMemory.shared;
+//    [manager set:@"testkdfkdk" key:CKKey.mykey2];
+//    [manager set:obj key:CKKey.mykey3];
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        NSLog(@"%@", [manager value:CKKey.mykey2].string);
+//        NSLog(@"%@", ((ObjectCoding *)[manager value:CKKey.mykey3].any).name);
+//        NSLog(@"%d", ((ObjectCoding *)[manager value:CKKey.mykey3].any).age);
+//    });
 }
 
 - (instancetype)init

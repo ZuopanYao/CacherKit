@@ -7,86 +7,81 @@
 
 import Foundation
 
-public class CKDisk: NSObject {
-    
-    @objc public static let shared: CKDisk = .init()
-    private override init() { super.init() }
-    
+public class CKDisk {
+
     private let disk = UserDefaults.standard
-    public subscript(key: CKKey) -> CKValue {
-        CKValue(disk.value(forKey: key.value))
+    private var key: CKKey
+    
+    required init(key: CKKey) {
+        self.key = key
     }
     
-    public subscript<T: NSObject & NSCoding>(Base: T.Type) -> T? {
-        get {
-            guard let data = disk.data(forKey: "\(Base.self)") else {
-                return nil
-            }
-            return unarchive(data) as? T
-        }
-        set {
-            if newValue == nil {
-                remove(CKKey("\(Base.self)"))
-                return
-            }
-            disk.setValue(archived(newValue!), forKey: "\(Base.self)")
-        }
-    }
-    
-    public subscript<T: Codable>(Base: T.Type) -> T? {
-        get {
-            guard let data = disk.data(forKey: "\(Base.self)") else {
-                return nil
-            }
-            
-            do { return try JSONDecoder().decode(Base.self, from: data) }
-            catch { CKLog(error) }
-            return nil
-        }
-        set {
-            if newValue == nil {
-                remove(CKKey("\(Base.self)"))
-                return
-            }
-            do {
-                let data = try JSONEncoder().encode(newValue)
-                disk.setValue(data, forKey: "\(Base.self)") }
-            catch { CKLog(error) }
-        }
-    }
-    
-    @objc public func set(_ value: Any?, key: CKKey) {
-        if value == nil {
-            remove(key)
-            return
-        }
-        disk.setValue(value, forKey: key.value)
-    }
-    
-    @objc public func remove(_ key: CKKey) {
+    public func remove() {
         disk.removeObject(forKey: key.value)
     }
+}
+
+extension CKKey {
     
-    // MARK: - Additional supprt for ObjC' NSCoding
-    @objc public func setCoding(_ value: Any?, key: CKKey) {
-        if value == nil {
-            remove(key)
-            return
-        }
-        
-        disk.setValue(archived(value!), forKey: key.value)
+    /// 持久性缓存 (UserDefaults)
+    public var disk: CKDisk {
+        return .init(key: self)
+    }
+}
+
+extension CKDisk: CKCacheProtocol {
+    
+    public var url: URL? {
+        get { disk.url(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
     }
     
-    @objc public func getCoding(_ key: CKKey) -> Any? {
-        guard let data = disk.data(forKey: key.value) else {
-            return nil
-        }
-        
-        return unarchive(data)
+    public var bool: Bool {
+        get { disk.bool(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
     }
     
-    // MARK: - Additional supprt for ObjC get
-    @objc public func value(_ key: CKKey) -> CKValue {
-        return self[key]
+    public var string: String? {
+        get { disk.string(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public var data: Data? {
+        get { disk.data(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public var int: Int? {
+        get { disk.integer(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public var float: Float? {
+        get { disk.float(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public var double: Double? {
+        get { disk.double(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public var array: [Any]? {
+        get { disk.array(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public var stringArray: [String]? {
+        get { disk.stringArray(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public var dictionary: [String: Any]? {
+        get { disk.dictionary(forKey: key.value) }
+        set { disk.set(newValue, forKey: key.value) }
+    }
+    
+    public func array<T>(_ Type: T.Type) -> [T]? {
+        return array as? [T]
     }
 }

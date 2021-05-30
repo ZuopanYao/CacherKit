@@ -28,7 +28,8 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 如果您不喜欢以上管理依赖库的方式，则可以手动将 CacherKit 集成到项目中。
 
 
-## Usage / 使用
+## Usage in Swift / 使用
+[Usage  in Objective-C](./READMEOC.md)
 ### General
 
 #### Define Your Key

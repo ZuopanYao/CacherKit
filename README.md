@@ -5,6 +5,9 @@ iOS 简单缓存管理库，支持内存、磁盘、钥匙串，接口统一。
 [![Platform](https://img.shields.io/cocoapods/p/CacherKit.svg?style=flat)](https://github.com/ZuopanYao/CacherKit)
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/CacherKit.svg)](https://cocoapods.org/pods/CacherKit)
 
+## Warning
+
+Verstion 2.0.0 not downward compatible.
 
 ## Requirements / 使用条件
 
@@ -29,7 +32,7 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 
 
 ## Usage in Swift / 使用
-[Usage  in Objective-C](./READMEOC.md)
+
 ### General
 
 #### Define Your Key
@@ -45,57 +48,52 @@ extension CKKey {
 #### Adding an item
 ```
 /// Saving to disk (With UserDefaults)
-CK.disk.set("TestString", key: .mykey)
+CKKey.mykey.disk.string = "TestString"
         
 /// Saving to memory
-CK.memory.set("TestString", key: .mykey)
+CKKey.mykey.memory.string = "TestString"
         
 /// Saving to keychain
-CK.keychain.set("TestString", key: .mykey)
+CKKey.mykey.keychain.string = "TestString"
 ```
 
-#### Obtaining an item (subscripting)
+#### Obtaining an item 
+
 ```
-//let value = CK.disk[.mykey]
-//let value = CK.keychain[.mykey]
-let value = CK.memory[.mykey]
-        
-// Convert to String
-let str = value.string
-
-// Convert to Data
-let data = value.data
-// .....
-
+/// Read from disk (With UserDefaults)
+let diskString = CKKey.mykey.disk.string
+/// Read from keychain
+let keychainString = CKKey.mykey.keychain.string
+/// Read from memory
+let memoryString = CKKey.mykey.memory.string
 ```
 
 #### Removing an item
-##### set nil
+##### Set nil
 ```
  /// Removing from disk (With UserDefaults)
-CK.disk.set(nil, key: .mykey)
+CKKey.mykey.disk.string = nil
     
 /// Removing from memory
-CK.memory.set(nil, key: .mykey)
+CKKey.mykey.memory.string = nil
     
 /// Removing from keychain
-CK.keychain.set(nil, key: .mykey)
+CKKey.mykey.keychain.string = nil
 ```
 
 ##### Remove method
 ```
 /// Removing from disk (With UserDefaults)
-CK.disk.remove(.mykey)
+CKKey.mykey.disk.remove()
     
 /// Removing from memory
-CK.memory.remove(.mykey)
+CKKey.mykey.memory.remove()
     
 /// Removing from keychain
-CK.keychain.remove(.mykey)
+CKKey.mykey.keychain.remove()
 ```
 
-### Saving model ( Codable or NSCoding )
-
+### Saving model ( Must be Codable )
 
 #### Model Example
 
@@ -106,51 +104,31 @@ struct MyModel: Codable {
     var age: Int = 100
 }
 
-/// Must be NSObject and NSCoding
-class ModelObject: NSObject, NSCoding {
-    
-    var name: String = ""
-    var age: Int = 100
-    
-    override init() {
-        super.init()
-    }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(name, forKey: "name")
-        coder.encode(age, forKey: "age")
-    }
-    
-    required init?(coder: NSCoder) {
-        name = coder.decodeObject(forKey: "name") as! String
-        age = coder.decodeInteger(forKey: "age")
-    }
-}
 ```
 
-#### Saving and Obtaining and Removing
+#### Saving、 Obtaining and Removing
 
 ```
- let model = ModelObject()
+let model = MyModel()
         
 /// Saving to disk (With UserDefaults)
-CK.disk[ModelObject.self] = model
+model.encode(to: .disk)
     
 /// Saving to memory
-CK.memory[ModelObject.self] = model
+model.encode(to: .memory)
     
 /// Saving to keychain
-CK.keychain[ModelObject.self] = model
+model.encode(to: .keychain)
     
 /// Obtaining
-let redadModel1 = CK.disk[MyModel.self]
-let redadModel2 = CK.memory[MyModel.self]
-let redadModel3 = CK.keychain[MyModel.self]
-
+let instanceFromDisk: MyModel? = MyModel.decode(from: .disk)
+let instanceFromMemory: MyModel? = MyModel.decode(from: .memory)
+let instanceFromKeychain: MyModel? = MyModel.decode(from: .keychain)
+        
 /// Removing
-CK.disk[MyModel.self] = nil
-CK.memory[MyModel.self] = nil
-CK.keychain[MyModel.self] = nil
+MyModel.remove(from: .disk)
+MyModel.remove(from: .memory)
+MyModel.remove(from: .keychain)
 ```
 
 

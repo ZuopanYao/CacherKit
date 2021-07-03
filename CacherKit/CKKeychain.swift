@@ -17,13 +17,13 @@ public class CKKeychain {
     
     private var key: CKKey
     
-    required init(key: CKKey) {
+    required init<K: CKKey>(key: K) {
         self.key = key
     }
     
     public func remove() {
         do {
-            try Self.keychain.remove(key.value)
+            try Self.keychain.remove(key.rawValue)
         } catch {
             echo(error)
         }
@@ -57,18 +57,18 @@ extension CKKeychain: CKCacheProtocol {
     }
     
     public var string: String? {
-        get { Self.keychain[key.value] }
+        get { Self.keychain[key.rawValue] }
         set {
             guard let newValue = newValue else { return remove() }
-            Self.keychain[key.value] = newValue
+            Self.keychain[key.rawValue] = newValue
         }
     }
     
     public var data: Data? {
-        get { Self.keychain[data: key.value] }
+        get { Self.keychain[data: key.rawValue] }
         set {
             guard let newValue = newValue else { return remove() }
-            Self.keychain[data: key.value] = newValue
+            Self.keychain[data: key.rawValue] = newValue
         }
     }
     
@@ -96,7 +96,7 @@ extension CKKeychain: CKCacheProtocol {
             return Double(string) ?? 0.0
         }
         set {
-            Self.keychain[key.value] = "\(newValue)"
+            Self.keychain[key.rawValue] = "\(newValue)"
         }
     }
     

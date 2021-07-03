@@ -9,7 +9,7 @@ import Foundation
 
 protocol CKCacheProtocol {
  
-    init(key: CKKey)
+    init<K: CKKey>(key: K)
     func remove()
     func array<T>(_ Type: T.Type) -> [T]?
     

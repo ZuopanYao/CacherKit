@@ -8,70 +8,109 @@
 import UIKit
 import CacherKit
 
-class Test: NSObject, NSCoding {
-    
-    var name: String = "name"
-    var age: Int = 100
-    
-    override init() {
-        super.init()
-    }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(name, forKey: "name")
-        coder.encodeCInt(Int32(age), forKey: "age")
-    }
-    
-    required init?(coder: NSCoder) {
-        name = coder.decodeObject(forKey: "name") as! String
-        age = coder.decodeInteger(forKey: "age")
-    }
-}
 
-class SwiftTest: Codable {
+//class MyModel: NSObject, NSCoding {
+//
+//    var name: String = "name"
+//    var age: Int = 100
+//
+//    override init() {
+//        super.init()
+//    }
+//
+//    func encode(with coder: NSCoder) {
+//        coder.encode(name, forKey: "name")
+//        coder.encodeCInt(Int32(age), forKey: "age")
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        name = coder.decodeObject(forKey: "name") as! String
+//        age = coder.decodeInteger(forKey: "age")
+//    }
+//}
+
+class MyModel: Codable {
     var name: String = "klsfkdslfk"
     var age: Int = 999
 }
 
-extension CKKey {
-    static let mykey: CKKey = .init("mykey")
-    static let mykeyData: CKKey = .init("mykeydata")
-    static let test: CKKey = .init("Test")
-    
-    static let url: CKKey = .init("mykeyURL")
-    static let fileURL: CKKey = .init("mykeydataFILEURL")
+enum MyKey: String, CKKey {
+    case test
+    case two
 }
 
-/// Must be codable
-struct MyModel: Codable {
-    var name: String = "gvatfsa"
-    var age: Int = 100
-}
-
+/// Must be codabl
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let bool:  = DiskCache.shared[.mykey].
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            MyKey.test.disk.string = "diskString"
+            usleep(useconds_t(0.3 * 1000000.0))
+            print(MyKey.test.disk.string!)
+        }
         
-        var model = MyModel()
-        model.name = "gkesljagtmkleww"
-        model.encode(to: .disk)
-                
-//
-        //CKKey.mykey.keychain.array = [12.8, 13.88, 15.888]
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2.0) {
+            MyKey.test.memory.string = "memoryString"
+            usleep(useconds_t(0.3 * 1000000.0))
+            print(MyKey.test.memory.string!)
+        }
         
-        let path =  Bundle.main.path(forResource: "Info", ofType: "plist")
-        print(path)
-        CKKey.fileURL.keychain.url = URL(fileURLWithPath: path!)
-        CKKey.url.keychain.url = URL(string: "https://www.baidu.com")
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3.0) {
+            MyKey.test.keychain.string = "keychainString"
+            usleep(useconds_t(0.3 * 1000000.0))
+            print(MyKey.test.keychain.string!)
+        }
         
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 2.0) {
-            print( CKKey.fileURL.keychain.url,  CKKey.url.keychain.url)
+        DispatchQueue.global().asyncAfter(deadline: .now() + 4.0) {
+            let model = MyModel()
+            model.encode(to: .keychain)
+            usleep(useconds_t(0.3 * 1000000.0))
+            
+            let instance = MyModel.decode(from: .keychain)!
+            print(instance.age, instance.name)
         }
         
         
+        //MyKey(rawValue: "kk")
+
+        ////        let bool:  = DiskCache.shared[.mykey].
+//
+//        var model = MyModel()
+//        model.name = "gkesljagtmkleww"
+//        model.encode(to: .disk)
+//
+////
+//        //CKKey.mykey.keychain.array = [12.8, 13.88, 15.888]
+//
+//        let path =  Bundle.main.path(forResource: "Info", ofType: "plist")
+//        print(path)
+//        CKKey.fileURL.keychain.url = URL(fileURLWithPath: path!)
+//        CKKey.url.keychain.url = URL(string: "https://www.baidu.com")
+//        CKKey.mykey.disk.remove()
+//
+//        let diskString = CKKey.mykey.disk.string
+//        let keychainString = CKKey.mykey.keychain.string
+//        let memoryString = CKKey.mykey.memory.string
+//
+//        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 2.0) {
+//            print( CKKey.fileURL.keychain.url,  CKKey.url.keychain.url)
+//        }
+//
+        /// save
+        let model = MyModel()
+        model.encode(to: .disk)
+        model.encode(to: .keychain)
+        model.encode(to: .memory)
+        
+        /// Read
+        let instanceFromDisk: MyModel? = MyModel.decode(from: .disk)
+        let instanceFromKeychain: MyModel? = MyModel.decode(from: .keychain)
+        let instanceFromMemory: MyModel? = MyModel.decode(from: .memory)
+
+        
+        MyModel.remove(from: .disk)
         //CKKey.mykey1.disk.bool = false
 //
 //        /// Saving to disk (With UserDefaults)

@@ -9,15 +9,15 @@ import Foundation
 
 public class CKMemory {
     
-    private static var memory: [CKKey: Any] = [:]
+    private static var memory: [String: Any] = [:]
     private var key: CKKey
     
-    required init(key: CKKey) {
+    required init<K: CKKey>(key: K) {
         self.key = key
     }
     
     public func remove() {
-        Self.memory.removeValue(forKey: key)
+        Self.memory.removeValue(forKey: key.rawValue)
     }
 }
 
@@ -32,53 +32,53 @@ extension CKKey {
 extension CKMemory: CKCacheProtocol {
     
     public var url: URL? {
-        get { Self.memory[key] as? URL }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? URL }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var bool: Bool {
-        get { Self.memory[key] as? Bool ?? false }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? Bool ?? false }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var string: String? {
-        get { Self.memory[key] as? String }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? String }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var data: Data? {
-        get { Self.memory[key] as? Data }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? Data }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var int: Int {
-        get { Self.memory[key] as? Int ?? 0 }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? Int ?? 0 }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var float: Float {
-        get { Self.memory[key] as? Float ?? 0.0 }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? Float ?? 0.0 }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var double: Double {
-        get { Self.memory[key] as? Double ?? 0.0 }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? Double ?? 0.0 }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var array: [Any]? {
-        get { Self.memory[key] as? [Any] }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? [Any] }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var stringArray: [String]? {
-        get { Self.memory[key] as? [String] }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? [String] }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public var dictionary: [String: Any]? {
-        get { Self.memory[key] as? [String: Any] }
-        set { Self.memory[key] = newValue }
+        get { Self.memory[key.rawValue] as? [String: Any] }
+        set { Self.memory[key.rawValue] = newValue }
     }
     
     public func array<T>(_ Type: T.Type) -> [T]? {

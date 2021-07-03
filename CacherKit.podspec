@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "CacherKit"
-  spec.version      = "3.0.0"
+  spec.version      = "4.0.0"
   spec.summary      = "iOS 简单缓存管理库，支持内存、磁盘、钥匙串，接口统一"
 
   # This description is used to generate tags and improve search results.

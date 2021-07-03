@@ -8,10 +8,7 @@
 
 import Foundation
 
-public class CKKey: NSObject {
-        
-    var value: String
-    public init(_ value: String) {
-        self.value = value
-    }
+public protocol CKKey {
+    var rawValue: String { get }
+    init?(rawValue: String)
 }

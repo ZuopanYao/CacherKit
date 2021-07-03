@@ -38,6 +38,24 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 ### General
 
 #### Define Your Key
+
+- v4.0.0+
+
+```
+import CacherKit
+
+enum MyLoveKeyName: String, CKKey {
+    case someKey1
+    case someKey2
+    ///
+    /// .....
+    ///
+}
+
+```
+
+- Old version
+
 ```
 import CacherKit
 

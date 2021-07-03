@@ -51,18 +51,18 @@ extension CKMemory: CKCacheProtocol {
         set { Self.memory[key] = newValue }
     }
     
-    public var int: Int? {
-        get { Self.memory[key] as? Int }
+    public var int: Int {
+        get { Self.memory[key] as? Int ?? 0 }
         set { Self.memory[key] = newValue }
     }
     
-    public var float: Float? {
-        get { Self.memory[key] as? Float }
+    public var float: Float {
+        get { Self.memory[key] as? Float ?? 0.0 }
         set { Self.memory[key] = newValue }
     }
     
-    public var double: Double? {
-        get { Self.memory[key] as? Double }
+    public var double: Double {
+        get { Self.memory[key] as? Double ?? 0.0 }
         set { Self.memory[key] = newValue }
     }
     

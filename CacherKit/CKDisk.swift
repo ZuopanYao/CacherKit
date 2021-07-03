@@ -51,17 +51,17 @@ extension CKDisk: CKCacheProtocol {
         set { disk.set(newValue, forKey: key.value) }
     }
     
-    public var int: Int? {
+    public var int: Int {
         get { disk.integer(forKey: key.value) }
         set { disk.set(newValue, forKey: key.value) }
     }
     
-    public var float: Float? {
+    public var float: Float {
         get { disk.float(forKey: key.value) }
         set { disk.set(newValue, forKey: key.value) }
     }
     
-    public var double: Double? {
+    public var double: Double {
         get { disk.double(forKey: key.value) }
         set { disk.set(newValue, forKey: key.value) }
     }

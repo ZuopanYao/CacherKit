@@ -72,35 +72,30 @@ extension CKKeychain: CKCacheProtocol {
         }
     }
     
-    public var int: Int? {
+    public var int: Int {
         get {
-            guard let double = double else { return nil }
             return Int(double)
         }
         set {
-            guard let newValue = newValue else { return remove() }
             double = Double(newValue)
         }
     }
     
-    public var float: Float? {
+    public var float: Float {
         get {
-            guard let double = double else { return nil }
             return Float(double)
         }
         set {
-            guard let newValue = newValue else { return remove() }
             double = Double(newValue)
         }
     }
     
-    public var double: Double? {
+    public var double: Double {
         get {
-            guard let string = string else { return nil }
-            return Double(string)
+            guard let string = string else { return 0.0 }
+            return Double(string) ?? 0.0
         }
         set {
-            guard let newValue = newValue else { return remove() }
             Self.keychain[key.value] = "\(newValue)"
         }
     }

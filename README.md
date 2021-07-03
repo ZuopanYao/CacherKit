@@ -1,5 +1,7 @@
 # CacherKit
 
+Simple cache management library for iOS, support memory, disk and keychain, and this is unified interface.
+
 iOS 简单缓存管理库，支持内存、磁盘、钥匙串，接口统一。
 
 [![Platform](https://img.shields.io/cocoapods/p/CacherKit.svg?style=flat)](https://github.com/ZuopanYao/CacherKit)

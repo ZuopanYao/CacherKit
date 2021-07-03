@@ -52,6 +52,10 @@ enum MyLoveKeyName: String, CKKey {
     ///
 }
 
+/// Usage example
+MyLoveKeyName.someKey1.disk.string = "TestString"
+let read = MyLoveKeyName.someKey1.disk.string 
+
 ```
 
 - Old version
